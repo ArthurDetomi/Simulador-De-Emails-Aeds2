@@ -1,9 +1,9 @@
-typedef int dados;
+typedef int item;
 
 typedef struct{
     int tamanho;       // tamanho atual da lista
     int capacidade;   // capacidade total da lista
-    dados* dados;      // ponteiro para o array de elementos da lista
+    item* itens;      // ponteiro para o array de elementos da lista
 }lista_inteiros;
 
 // cria uma nova lista vazia com capacidade inicial
@@ -25,7 +25,7 @@ int lista_inteiros_get(lista_inteiros* list, int index);
 void lista_inteiros_set(lista_inteiros* list, int index, int element);
 
 // retorna o tamanho atual da lista
-int lista_inteiros_size(lista_inteiros* list);
+int lista_inteiros_tamanho(lista_inteiros* lista);
 
 // retorna a capacidade total da lista
 int lista_inteiros_capacity(lista_inteiros* list);
