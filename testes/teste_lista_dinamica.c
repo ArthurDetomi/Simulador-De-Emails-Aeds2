@@ -1,4 +1,5 @@
 #include "lista_inteiros.h"
+#include "lista_encadeada.h"
 
 #include <assert.h>
 #include <stdio.h>
