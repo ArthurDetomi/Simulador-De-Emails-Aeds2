@@ -1,11 +1,12 @@
 #include "lista_encadeada.h"
-
+#include "functions_utils.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 celula *cria_celula(item item_param) {
     celula *nova_celula = (celula *)malloc(sizeof(celula));
+    verifica_estouro_memoria(nova_celula, "cria_celula()");
     nova_celula->item = item_param;
     nova_celula->proximo = NULL;
     return nova_celula;
@@ -20,12 +21,10 @@ void lista_encadeada_add_item(lista_encadeada lista, item item_param) {
         return;
     }
 
-    while (lista->proximo != NULL) {
-        printf("loop\n");
-        lista = lista->proximo;
-    }
+    celula *celula_aux = lista->proximo;
     celula *nova_celula = cria_celula(item_param);
     lista->proximo = nova_celula;
+    lista->proximo->proximo = celula_aux;
 }
 
 bool lista_encadeada_esta_vazia(lista_encadeada lista) {

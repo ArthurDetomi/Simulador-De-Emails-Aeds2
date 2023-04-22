@@ -1,4 +1,6 @@
 #include "lista_inteiros.h"
+#include "lista_encadeada.h"
+#include "functions_utils.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -6,6 +8,7 @@
 
 lista_inteiros *cria_lista(void) {
     lista_inteiros *l = (lista_inteiros *)malloc(sizeof(lista_inteiros));
+    verifica_estouro_memoria(l, "cria_lista() - modulo 'lista_dinamica.h'");
     l->tamanho = 0;
     l->capacidade = 0;
     return l;
