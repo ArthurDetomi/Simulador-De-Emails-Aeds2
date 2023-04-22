@@ -18,7 +18,7 @@ bool lista_inteiro_esta_vazia(lista_inteiros *lista) {
     else if (lista->tamanho <= 0) {
         return true;
     }
-    return false;
+    return false; 
 }
 
 void destroi_lista(lista_inteiros *lista) {
