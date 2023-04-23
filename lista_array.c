@@ -1,30 +1,30 @@
-#include "lista_inteiros.h"
-#include "lista_encadeada.h"
 #include "functions_utils.h"
+#include "lista_array.h"
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-lista_inteiros *cria_lista(void) {
-    lista_inteiros *l = (lista_inteiros *)malloc(sizeof(lista_inteiros));
+lista_array *cria_lista_array(void) {
+    lista_array *l = (lista_array *)malloc(sizeof(lista_array));
     verifica_estouro_memoria(l, "cria_lista() - modulo 'lista_dinamica.h'");
     l->tamanho = 0;
     l->capacidade = 0;
     return l;
 }
 
-bool lista_inteiro_esta_vazia(lista_inteiros *lista) {
+bool lista_array_esta_vazia(lista_array *lista) {
     if (lista == NULL) {
         return true;
     }
     else if (lista->tamanho <= 0) {
         return true;
     }
-    return false; 
+    return false;
 }
 
-void destroi_lista(lista_inteiros *lista) {
+void destroi_lista_array(lista_array *lista) {
     if (lista == NULL) {
         printf("lista esta nula");
         return;
@@ -35,7 +35,7 @@ void destroi_lista(lista_inteiros *lista) {
     free(lista);
 }
 
-void lista_inteiros_add(lista_inteiros *lista, item item_param) {
+void lista_array_add(lista_array *lista, item item_param) {
     if (lista == NULL) {
         printf("lista esta nula");
         return;
@@ -43,12 +43,14 @@ void lista_inteiros_add(lista_inteiros *lista, item item_param) {
     if (lista->itens == NULL) {
         int nova_capacidade = 1;
         lista->itens = (item *)malloc(nova_capacidade * sizeof(item));
+        verifica_estouro_memoria(lista->itens, "lista_array_add()");
         lista->capacidade = nova_capacidade;
     }
-    else if (lista->tamanho > lista->capacidade) {
+    else if (lista->tamanho >= lista->capacidade) {
         int nova_capacidade
             = (lista->capacidade > 0) ? lista->capacidade * 2 : 1;
         lista->itens = realloc(lista->itens, nova_capacidade * sizeof(item));
+        verifica_estouro_memoria(lista->itens, "lista_array_add()");
         lista->capacidade = nova_capacidade;
     }
     int posicao_final = lista->tamanho;
@@ -56,7 +58,7 @@ void lista_inteiros_add(lista_inteiros *lista, item item_param) {
     lista->tamanho++;
 }
 
-int lista_inteiros_tamanho(lista_inteiros *lista) {
+int lista_array_tamanho(lista_array *lista) {
     if (lista == NULL || lista->itens == NULL) {
         printf("lista esta nula");
         return -1;
@@ -64,7 +66,7 @@ int lista_inteiros_tamanho(lista_inteiros *lista) {
     return lista->tamanho;
 }
 
-int lista_inteiros_capacidade(lista_inteiros *lista) {
+int lista_array_capacidade(lista_array *lista) {
     if (lista == NULL) {
         printf("lista esta nula");
         return -1;
@@ -72,7 +74,7 @@ int lista_inteiros_capacidade(lista_inteiros *lista) {
     return lista->capacidade;
 }
 
-void lista_inteiros_set(lista_inteiros *lista, int indice, item item) {
+void lista_array_set(lista_array *lista, int indice, item item) {
     if (lista == NULL) {
         printf("lista esta nula");
         return;
@@ -84,7 +86,7 @@ void lista_inteiros_set(lista_inteiros *lista, int indice, item item) {
     lista->itens[indice] = item;
 }
 
-bool lista_inteiros_remove(lista_inteiros *lista, int indice) {
+bool lista_array_remove(lista_array *lista, int indice) {
     if (lista == NULL) {
         printf("lista esta nula");
         return false;
@@ -106,14 +108,15 @@ bool lista_inteiros_remove(lista_inteiros *lista, int indice) {
     return true;
 }
 
-int lista_inteiros_get(lista_inteiros *lista, int indice) {
+item lista_array_get(lista_array *lista, int indice) {
+    item item;
     if (lista == NULL) {
         printf("lista esta nula");
-        return -1;
+        return item;
     }
     if (indice >= lista->tamanho || indice < 0) {
         printf("Indice inserido invalido");
-        return -1;
+        return item;
     }
     return lista->itens[indice];
 }
