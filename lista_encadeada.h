@@ -1,10 +1,12 @@
 #ifndef LISTA_ENCADEADA_H
 #define LISTA_ENCADEADA_H
-#include <stdbool.h>
 #include "lista_array.h"
+
+#include <stdbool.h>
 
 typedef int chave;
 
+// elemento passado deve possuir id, logo deve ser uma struct
 typedef usuario elemento;
 
 typedef struct celula {
@@ -23,8 +25,8 @@ void lista_encadeada_add_elemento(lista_encadeada lista, elemento elemento_param
 // Verifica se a lista está vazia
 bool lista_encadeada_esta_vazia(lista_encadeada lista);
 
-// Remove o primeiro elemento da lista encadeada
-void lista_encadeada_remove_elemento(lista_encadeada lista, elemento elemento_param);
+// Remove o elemento com o id passado
+void lista_encadeada_remove_elemento(lista_encadeada lista, int id_elemento);
 
 // Retorna a quantidade de itens presente na lista
 int lista_encadeada_tamanho(lista_encadeada lista);
@@ -32,7 +34,8 @@ int lista_encadeada_tamanho(lista_encadeada lista);
 // Libera o espaço alocado da lista
 void destroi_lista_encadeada(lista_encadeada lista);
 
-// Percorre cada elemento da lista
-void lista_encadeada_percorre_itens(lista_encadeada lista);
+/* Percorre a lista encontra o elemento com o respectivo id e verifica se ele se
+ * encontra ou não na lista*/
+bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id);
 
 #endif

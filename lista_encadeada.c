@@ -43,7 +43,7 @@ void lista_encadeada_remove_primeiro_da_lista(lista_encadeada lista) {
     free(celula_anterior);
 }
 
-void lista_encadeada_remove_elemento(lista_encadeada lista, elemento elemento_param) {
+void lista_encadeada_remove_elemento(lista_encadeada lista, int id_elemento) {
     if (lista_encadeada_esta_vazia(lista)) {
         printf("Lista vazia");
         return;
@@ -51,7 +51,7 @@ void lista_encadeada_remove_elemento(lista_encadeada lista, elemento elemento_pa
     celula *celula_atual = lista->proximo;
     celula *celula_anterior = lista;
     while (celula_atual != NULL) {
-        if (celula_atual->elemento.id == elemento_param.id) {
+        if (celula_atual->elemento.id == id_elemento) {
             celula_anterior->proximo = celula_atual->proximo;
             free(celula_atual);
             return;
@@ -79,4 +79,19 @@ void destroi_lista_encadeada(lista_encadeada lista) {
         lista_encadeada_remove_primeiro_da_lista(lista);
     }
     free(lista);
+}
+
+bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id) {
+    if (lista_encadeada_esta_vazia(lista)) {
+        return false;
+    }
+    int tamanho_lista = lista_encadeada_tamanho(lista);
+    celula *celula_atual = lista->proximo; 
+    while (celula_atual != NULL) {
+        if (celula_atual->elemento.id == id) {
+            return true;
+        }
+        celula_atual = lista->proximo;
+    }
+    return false;
 }
