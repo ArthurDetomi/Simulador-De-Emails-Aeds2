@@ -14,6 +14,7 @@ int id_enviado_eh_valido(int id) {
 // Cadastra novo usuario
 bool cadastrar_novo_usuario(lista_encadeada lista, int id) {
     if (id_enviado_eh_valido(id)) {
+    if (!id_enviado_eh_valido(id)) {
         return false;
     }
     if (lista_encadeada_esta_vazia(lista)) {
