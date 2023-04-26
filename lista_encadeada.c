@@ -92,7 +92,7 @@ bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id)
         if (celula_atual->elemento.id == id) {
             return true;
         }
-        celula_atual = lista->proximo;
+        celula_atual = celula_atual->proximo;
     }
     return false;
 }
@@ -105,10 +105,11 @@ bool lista_encadeada_get_elemento_por_id(lista_encadeada lista, int id, elemento
     celula *celula_atual = lista->proximo;
     while (celula_atual != NULL) {
         if (celula_atual->elemento.id == id) {
-            *elemento_param = celula_atual->elemento;
+            elemento elemento_atual = celula_atual->elemento;
+            elemento_param = &elemento_atual;
             return true;
         }
-        celula_atual = lista->proximo;
+        celula_atual = celula_atual->proximo;
     }
     printf("Usuario passado não está "
            "presente:Function:lista_encadeada_get_elemento_por_id\n");

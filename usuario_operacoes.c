@@ -1,19 +1,12 @@
 #include "lista_array.h"
 #include "usuario_operacoes.h"
+#include "functions_utils.h"
 
 #include <stdio.h>
-
-int id_enviado_eh_valido(int id) {
-    if (id < 0 || id > 10000) {
-        printf("Parametro passado no id = %d invalido\n", id);
-        return 0;
-    }
-    return 1;
-}
+#include <stdlib.h>
 
 // Cadastra novo usuario
 bool cadastrar_novo_usuario(lista_encadeada lista, int id) {
-    if (id_enviado_eh_valido(id)) {
     if (!id_enviado_eh_valido(id)) {
         return false;
     }
@@ -44,8 +37,8 @@ bool cadastrar_novo_usuario(lista_encadeada lista, int id) {
     return true;
 }
 
+// Remove usuario e limpa sua caixa de entrada
 bool remover_usuario(lista_encadeada lista, int id) {
-    if (id_enviado_eh_valido(id)) {
     if (!id_enviado_eh_valido(id)) {
         return false;
     }
@@ -57,15 +50,19 @@ bool remover_usuario(lista_encadeada lista, int id) {
         printf("ERRO: CONTA %d NAO EXISTE\n", id);
         return false;
     }
-    usuario usuario_deletar;
-    if (!lista_encadeada_get_elemento_por_id(lista, id, &usuario_deletar)) {
+    usuario *usuario_deletar = (usuario *) malloc(sizeof(usuario));
+    if (!lista_encadeada_get_elemento_por_id(lista, id, usuario_deletar)) {
         printf("Falha ao remover usuário");
         return false;
     }
 
+
     // libera a memoria de sua caixa de mensagem e remove elemento,
     // desalocando-o
-    destroi_lista_array(usuario_deletar.caixa_de_entrada);
+    if (!lista_array_esta_vazia(usuario_deletar->caixa_de_entrada)) {
+        destroi_lista_array(usuario_deletar->caixa_de_entrada);
+    }
+    free(usuario_deletar);
     lista_encadeada_remove_elemento(lista, id);
 
     printf("OK: CONTA %d REMOVIDA\n", id);

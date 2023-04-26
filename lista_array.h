@@ -6,6 +6,7 @@
 typedef struct {
     int prioridade;
     time_t data_hora_envio;
+    char *mensagem;
 } email;
 
 typedef email item;
@@ -47,5 +48,8 @@ int lista_array_tamanho(lista_array *lista);
 
 // retorna a capacidade total da lista
 int lista_array_capacidade(lista_array *lista);
+
+// Adiciona item com prioridade, ordenando por inserção
+void lista_array_add_com_prioridade(lista_array *lista, item item_param);
 
 #endif

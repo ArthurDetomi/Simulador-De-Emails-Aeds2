@@ -8,3 +8,11 @@ void verifica_estouro_memoria(void *ponteiro, char *msg) {
     }
     return;
 }
+
+int id_enviado_eh_valido(int id) {
+    if (id < 0 || id > 10000) {
+        printf("Parametro passado no id = %d invalido\n", id);
+        return 0;
+    }
+    return 1;
+}

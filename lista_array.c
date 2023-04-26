@@ -26,7 +26,7 @@ bool lista_array_esta_vazia(lista_array *lista) {
 
 void destroi_lista_array(lista_array *lista) {
     if (lista == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return;
     }
     if (lista->itens != NULL) {
@@ -56,6 +56,54 @@ void lista_array_add(lista_array *lista, item item_param) {
     int posicao_final = lista->tamanho;
     lista->itens[posicao_final] = item_param;
     lista->tamanho++;
+}
+
+void adiciona_item_indice_especifico(
+    lista_array *lista, item item_param, int indice
+) {
+    for (int i = indice; i < lista->tamanho - 1; i++) {
+        lista->itens[i + 1] = lista->itens[i];
+    }
+    lista->itens[indice] = item_param;
+}
+
+void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
+    if (lista == NULL) {
+        printf("lista esta nula");
+        return;
+    }
+    if (lista->itens == NULL) {
+        int nova_capacidade = 1;
+        lista->itens = (item *)malloc(nova_capacidade * sizeof(item));
+        verifica_estouro_memoria(lista->itens, "lista_array_add()");
+        lista->capacidade = nova_capacidade;
+    }
+    else if (lista->tamanho >= lista->capacidade) {
+        int nova_capacidade
+            = (lista->capacidade > 0) ? lista->capacidade * 2 : 1;
+        lista->itens = realloc(lista->itens, nova_capacidade * sizeof(item));
+        verifica_estouro_memoria(lista->itens, "lista_array_add()");
+        lista->capacidade = nova_capacidade;
+    }
+
+    for (int i = 0; i < lista->tamanho; i++) {
+        item item_atual = lista->itens[i];
+        if (item_param.prioridade == item_atual.prioridade) {
+            lista->tamanho++;
+            adiciona_item_indice_especifico(lista, item_param, i + 1);
+            return;
+        }
+        else if (item_param.prioridade > item_atual.prioridade) {
+            lista->tamanho++;
+            adiciona_item_indice_especifico(lista, item_param, i);
+            return;
+        }
+    }
+
+    int posicao_final = lista->tamanho;
+    lista->itens[posicao_final] = item_param;
+    lista->tamanho++;
+    return;
 }
 
 int lista_array_tamanho(lista_array *lista) {
