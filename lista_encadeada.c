@@ -1,5 +1,6 @@
-#include "lista_encadeada.h"
 #include "functions_utils.h"
+#include "lista_encadeada.h"
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,9 +13,9 @@ celula *cria_celula(elemento elemento_param) {
     return nova_celula;
 }
 
-lista_encadeada cria_lista_encadeada() { 
+lista_encadeada cria_lista_encadeada() {
     elemento elemento_vazio;
-    return cria_celula(elemento_vazio); 
+    return cria_celula(elemento_vazio);
 }
 
 void lista_encadeada_add_elemento(lista_encadeada lista, elemento elemento_param) {
@@ -86,12 +87,30 @@ bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id)
         return false;
     }
     int tamanho_lista = lista_encadeada_tamanho(lista);
-    celula *celula_atual = lista->proximo; 
+    celula *celula_atual = lista->proximo;
     while (celula_atual != NULL) {
         if (celula_atual->elemento.id == id) {
             return true;
         }
         celula_atual = lista->proximo;
     }
+    return false;
+}
+
+bool lista_encadeada_get_elemento_por_id(lista_encadeada lista, int id, elemento *elemento_param) {
+    if (lista_encadeada_esta_vazia(lista)) {
+        return false;
+    }
+    int tamanho_lista = lista_encadeada_tamanho(lista);
+    celula *celula_atual = lista->proximo;
+    while (celula_atual != NULL) {
+        if (celula_atual->elemento.id == id) {
+            *elemento_param = celula_atual->elemento;
+            return true;
+        }
+        celula_atual = lista->proximo;
+    }
+    printf("Usuario passado não está "
+           "presente:Function:lista_encadeada_get_elemento_por_id\n");
     return false;
 }

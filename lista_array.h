@@ -18,7 +18,7 @@ typedef struct {
 
 typedef struct {
     int id;
-    lista_array caixa_de_entrada;
+    lista_array *caixa_de_entrada;
 } usuario;
 
 // cria uma nova lista vazia com capacidade inicial

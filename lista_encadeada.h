@@ -38,4 +38,7 @@ void destroi_lista_encadeada(lista_encadeada lista);
  * encontra ou não na lista*/
 bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id);
 
+// Passa o elemento pesquisado atraves de um ponteiro, retorna se operação falhou ou não
+bool lista_encadeada_get_elemento_por_id(lista_encadeada lista, int id, elemento* elemento);
+
 #endif
