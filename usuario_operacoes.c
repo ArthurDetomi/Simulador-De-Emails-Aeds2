@@ -20,8 +20,11 @@ bool cadastrar_novo_usuario(lista_encadeada lista, int id) {
         usuario novo_usuario;
         novo_usuario.id = id;
         lista_encadeada_add_elemento(lista, novo_usuario);
-        lista_array *lista_array_nova = cria_lista_array();
-        novo_usuario.caixa_de_entrada = lista_array_nova;
+        
+        // Registra novo usuário  e cria nova caixa de entrada para ele
+        lista_array *nova_caixa_de_entrada = cria_lista_array();
+        novo_usuario.caixa_de_entrada = nova_caixa_de_entrada;
+        
         return true;
     }
     if (lista_encadeada_checa_elemento_esta_presente(lista, id)) {
@@ -30,9 +33,12 @@ bool cadastrar_novo_usuario(lista_encadeada lista, int id) {
     }
     usuario novo_usuario;
     novo_usuario.id = id;
+
+    // Registra novo usuário  e cria nova caixa de entrada para ele
     lista_encadeada_add_elemento(lista, novo_usuario);
-    lista_array *lista_array_nova = cria_lista_array();
-    novo_usuario.caixa_de_entrada = lista_array_nova;
+    lista_array *nova_caixa_de_entrada = cria_lista_array();
+    novo_usuario.caixa_de_entrada = nova_caixa_de_entrada;
+
     printf("OK: CONTA %d CADASTRADA\n", id);
     return true;
 }
