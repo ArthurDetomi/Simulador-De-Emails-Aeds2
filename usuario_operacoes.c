@@ -54,10 +54,8 @@ bool remover_usuario(lista_encadeada lista, int id) {
 
     // libera a memoria de sua caixa de mensagem e remove elemento,
     // desalocando-o
-    if (!lista_array_esta_vazia(usuario_deletar.caixa_de_entrada)) {
-        destroi_lista_array(usuario_deletar.caixa_de_entrada);
-    }
- 
+    destroi_lista_array(usuario_deletar.caixa_de_entrada);
+    
     lista_encadeada_remove_elemento(lista, id);
     printf("OK: CONTA %d REMOVIDA\n", id);
     return true;
