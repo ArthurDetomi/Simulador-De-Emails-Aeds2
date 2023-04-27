@@ -28,8 +28,7 @@ void destroi_lista_array(lista_array *lista) {
     if (lista == NULL) {
         printf("lista esta nula\n");
         return;
-    }
-    if (lista->itens != NULL) {
+    }else if (lista->itens != NULL) {
         free(lista->itens);
     }
     free(lista);
@@ -37,7 +36,7 @@ void destroi_lista_array(lista_array *lista) {
 
 void lista_array_add(lista_array *lista, item item_param) {
     if (lista == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return;
     }
     if (lista->itens == NULL) {
@@ -58,9 +57,7 @@ void lista_array_add(lista_array *lista, item item_param) {
     lista->tamanho++;
 }
 
-void adiciona_item_indice_especifico(
-    lista_array *lista, item item_param, int indice
-) {
+void adiciona_item_indice_especifico(lista_array *lista, item item_param, int indice) {
     for (int i = indice; i < lista->tamanho - 1; i++) {
         lista->itens[i + 1] = lista->itens[i];
     }
@@ -69,7 +66,7 @@ void adiciona_item_indice_especifico(
 
 void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
     if (lista == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return;
     }
     if (lista->itens == NULL) {
@@ -108,7 +105,7 @@ void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
 
 int lista_array_tamanho(lista_array *lista) {
     if (lista == NULL || lista->itens == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return -1;
     }
     return lista->tamanho;
@@ -116,7 +113,7 @@ int lista_array_tamanho(lista_array *lista) {
 
 int lista_array_capacidade(lista_array *lista) {
     if (lista == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return -1;
     }
     return lista->capacidade;
@@ -124,7 +121,7 @@ int lista_array_capacidade(lista_array *lista) {
 
 void lista_array_set(lista_array *lista, int indice, item item) {
     if (lista == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return;
     }
     if (indice >= lista->tamanho || indice < 0) {
@@ -136,7 +133,7 @@ void lista_array_set(lista_array *lista, int indice, item item) {
 
 bool lista_array_remove(lista_array *lista, int indice) {
     if (lista == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return false;
     }
     if (indice >= lista->tamanho || indice < 0) {
@@ -159,7 +156,7 @@ bool lista_array_remove(lista_array *lista, int indice) {
 item lista_array_get(lista_array *lista, int indice) {
     item item;
     if (lista == NULL) {
-        printf("lista esta nula");
+        printf("lista esta nula\n");
         return item;
     }
     if (indice >= lista->tamanho || indice < 0) {
@@ -167,4 +164,11 @@ item lista_array_get(lista_array *lista, int indice) {
         return item;
     }
     return lista->itens[indice];
+}
+
+void percorre_lista_array_prioridades(lista_array *lista) {
+    printf("chegou aqui\n");
+    for (int i = 0; i < lista_array_tamanho(lista); i++) {
+        printf("priori msg %d = %d \n", i, lista->itens->prioridade);
+    }
 }

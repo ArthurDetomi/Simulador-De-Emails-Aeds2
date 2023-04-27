@@ -38,6 +38,7 @@ bool lista_encadeada_esta_vazia(lista_encadeada lista) {
 void lista_encadeada_remove_primeiro_da_lista(lista_encadeada lista) {
     if (lista_encadeada_esta_vazia(lista)) {
         printf("Lista esta vazia\n");
+        return;
     }
     celula *celula_anterior = lista->proximo;
     lista->proximo = lista->proximo->proximo;
@@ -105,8 +106,7 @@ bool lista_encadeada_get_elemento_por_id(lista_encadeada lista, int id, elemento
     celula *celula_atual = lista->proximo;
     while (celula_atual != NULL) {
         if (celula_atual->elemento.id == id) {
-            elemento elemento_atual = celula_atual->elemento;
-            elemento_param = &elemento_atual;
+            *elemento_param = celula_atual->elemento;
             return true;
         }
         celula_atual = celula_atual->proximo;
