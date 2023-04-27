@@ -28,10 +28,18 @@ void destroi_lista_array(lista_array *lista) {
     if (lista == NULL) {
         printf("lista esta nula\n");
         return;
-    }else if (lista->itens != NULL) {
+    }
+    if (lista->itens != NULL) {
+        for(int i = 0; i < lista_array_tamanho(lista); i++) {
+            char *str = lista->itens[i].mensagem;
+            if (str != NULL)
+                free(str);
+        }
         free(lista->itens);
+        lista->itens = NULL;
     }
     free(lista);
+    lista = NULL;
 }
 
 void lista_array_add(lista_array *lista, item item_param) {
