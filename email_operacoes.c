@@ -8,23 +8,6 @@
 #include <time.h>
 #include <stdlib.h>
 
-// Atribui todos os atributos do email
-char* cria_email(email *email, char *msg, int priori_msg) {
-    // Atribui mensagem
-    int tamanho_msg = strlen(msg);
-    email->mensagem = (char *) malloc(tamanho_msg * sizeof(char));
-    verifica_estouro_memoria(email->mensagem, "cria_email()");
-    strcpy(email->mensagem, msg);
-
-    // Atribui hora
-    time_t agora;
-    time(&agora);
-    email->data_hora_envio = agora;
-
-    // Atribui prioridade da mensagem
-    email->prioridade = priori_msg;
-}
-
 // Entrega mensagem para o usuário com id correspondente
 bool entregar_email_para_usuario(lista_encadeada lista, int id_usuario, char *msg, int priori_msg) {
     if (!id_enviado_eh_valido(id_usuario)) {
@@ -39,7 +22,15 @@ bool entregar_email_para_usuario(lista_encadeada lista, int id_usuario, char *ms
 
     
     email novo_email;
-    cria_email(&novo_email, msg, priori_msg);
+    int tam = strlen(msg);
+    if (tam > 0) {
+        novo_email.mensagem = (char *) malloc(tam + 1);
+        strcpy(novo_email.mensagem, msg);
+    } else {
+        novo_email.mensagem = NULL;
+    }
+    
+    
 
     if (lista_array_esta_vazia(usuario_selecionado.caixa_de_entrada)) {
         lista_array_add(usuario_selecionado.caixa_de_entrada, novo_email);
