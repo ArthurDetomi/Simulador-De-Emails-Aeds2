@@ -30,10 +30,11 @@ void destroi_lista_array(lista_array *lista) {
         return;
     }
     if (lista->itens != NULL) {
-        for(int i = 0; i < lista_array_tamanho(lista); i++) {
+        for(int i = 0; i < lista->tamanho; i++) {
             char *str = lista->itens[i].mensagem;
-            if (str != NULL)
+            if (str != NULL) {
                 free(str);
+            }
         }
         free(lista->itens);
         lista->itens = NULL;
@@ -156,14 +157,13 @@ bool lista_array_remove(lista_array *lista, int indice) {
         printf("Indice inserido invalido\n");
         return false;
     }
+    free(lista->itens[indice].mensagem);
     if (indice == lista->tamanho - 1) {
-        item item;
-        lista->itens[indice] = item;
+        item item_temp;
+        lista->itens[indice] = lista->itens[indice];
     }
     else {
-        for (int i = indice; i < lista->tamanho - 1; i++) {
-            lista->itens[i] = lista->itens[i + 1];
-        }
+        memcpy(lista->itens, lista->itens + 1, sizeof(item) * (lista->tamanho - 1));
     }
     lista->tamanho--;
     return true;

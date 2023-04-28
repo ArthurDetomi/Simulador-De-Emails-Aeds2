@@ -11,4 +11,6 @@ int enviar_email_para_usuario(lista_encadeada lista, int id_usuario, char *msg, 
 // Consulta primeira mensagem da caixa de entrada e a remove
 int consulta_id_msg_priori(lista_encadeada lista_usuarios, int id_usuario, email *email_consulta);
 
+void remove_email_ja_consultado(lista_encadeada lista_usuarios, int id_usuario);
+
 #endif

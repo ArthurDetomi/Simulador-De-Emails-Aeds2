@@ -56,6 +56,5 @@ int remover_usuario(lista_encadeada lista, int id) {
     destroi_lista_array(usuario_deletar.caixa_de_entrada);
     
     lista_encadeada_remove_elemento(lista, id);
-    printf("OK: CONTA %d REMOVIDA\n", id);
-    return 200;
+    return 204;
 }

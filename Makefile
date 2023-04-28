@@ -1,17 +1,18 @@
 CC=gcc -std=c17
+CFLAGS=-g
 
 SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
 
 EXE=main
 
-all: run
+all: $(EXE)
 
 $(EXE):	$(OBJ)
-	$(CC) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.c
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(EXE)

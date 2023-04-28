@@ -68,6 +68,20 @@ int consulta_id_msg_priori(lista_encadeada lista_usuarios, int id_usuario, email
     }
 
     *email_consulta = lista_array_get(caixa_de_entrada_usuario, 0);
-    lista_array_remove(caixa_de_entrada_usuario, 0);
     return 200;
+}
+
+void remove_email_ja_consultado(lista_encadeada lista_usuarios, int id_usuario) {
+    if (!id_enviado_eh_valido(id_usuario)) {
+        return;
+    }
+    if (lista_encadeada_esta_vazia(lista_usuarios)) {
+        return;
+    }
+
+    usuario usuario_selecionado;
+    if (!lista_encadeada_get_elemento_por_id(lista_usuarios, id_usuario, &usuario_selecionado)) {
+        return;
+    }
+    bool removeu = lista_array_remove(usuario_selecionado.caixa_de_entrada, 0);
 }
