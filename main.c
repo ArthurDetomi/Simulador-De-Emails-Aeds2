@@ -34,14 +34,19 @@ int main(void) {
     usuario usuario3; 
     lista_encadeada_get_elemento_por_id(lista_usuarios, 3, &usuario3);
 
+    for (int i = 0; i < 13; i++) {
+        printf("prioridade = %d msg=%s\n", lista_array_get(usuario3.caixa_de_entrada, i).prioridade, lista_array_get(usuario3.caixa_de_entrada, i).mensagem);
+    }
+
+
     printf("consulta emails\n");
     for (int i = 0; i < 13; i++) {
         email email_requisicao;
         int resposta = consulta_id_msg_priori(lista_usuarios, 3, &email_requisicao);
         mensagens_servidor_resposta(resposta, 3, email_requisicao.mensagem);
+        remove_email_ja_consultado(lista_usuarios, 3);
         // printf("prioridade = %d msg=%s\n", lista_array_get(usuario3.caixa_de_entrada, i).prioridade, lista_array_get(usuario3.caixa_de_entrada, i).mensagem);
     }
-
 
     for(int i = 0; i < 10; i++) {
         int codigo_remover_resp = remover_usuario(lista_usuarios, i);
