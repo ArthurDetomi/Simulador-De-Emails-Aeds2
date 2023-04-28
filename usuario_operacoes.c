@@ -18,7 +18,6 @@ int cadastrar_novo_usuario(lista_encadeada lista, int id) {
         return 201;
     }
     if (lista_encadeada_checa_elemento_esta_presente(lista, id)) {
-        printf("ERRO:CONTA %d JA EXISTENTE\n", id);
         return 401;
     }
     usuario novo_usuario;
@@ -27,9 +26,7 @@ int cadastrar_novo_usuario(lista_encadeada lista, int id) {
     // Registra novo usuário  e cria nova caixa de entrada para ele
     novo_usuario.caixa_de_entrada = cria_lista_array();
     lista_encadeada_add_elemento(lista, novo_usuario);
-    
 
-    printf("OK: CONTA %d CADASTRADA\n", id);
     return 201;
 }
 
@@ -42,12 +39,10 @@ int remover_usuario(lista_encadeada lista, int id) {
         return 400;
     }
     if (!lista_encadeada_checa_elemento_esta_presente(lista, id)) {
-        printf("ERRO: CONTA %d NAO EXISTE\n", id);
         return 404;
     }
     usuario usuario_deletar;
     if (!lista_encadeada_get_elemento_por_id(lista, id, &usuario_deletar)) {
-        printf("Falha ao remover usuário\n");
         return 400;
     }
 
