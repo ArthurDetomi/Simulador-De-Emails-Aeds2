@@ -6,19 +6,19 @@
 #include <stdlib.h>
 
 // Cadastra novo usuario
-int cadastrar_novo_usuario(lista_encadeada lista, int id) {
+respostas_servidor cadastrar_novo_usuario(lista_encadeada lista, int id) {
     if (!id_enviado_eh_valido(id)) {
-        return 400;
+        return DADOS_INVALIDOS;
     }
     if (lista_encadeada_esta_vazia(lista)) {
         usuario novo_usuario;
         novo_usuario.id = id;
         novo_usuario.caixa_de_entrada = cria_lista_array();
         lista_encadeada_add_elemento(lista, novo_usuario);
-        return 201;
+        return CONTA_CADASTRADA;
     }
     if (lista_encadeada_checa_elemento_esta_presente(lista, id)) {
-        return 401;
+        return CONTA_JA_EXISTENTE;
     }
     usuario novo_usuario;
     novo_usuario.id = id;
@@ -27,23 +27,23 @@ int cadastrar_novo_usuario(lista_encadeada lista, int id) {
     novo_usuario.caixa_de_entrada = cria_lista_array();
     lista_encadeada_add_elemento(lista, novo_usuario);
 
-    return 201;
+    return CONTA_CADASTRADA;
 }
 
 // Remove usuario e limpa sua caixa de entrada
-int remover_usuario(lista_encadeada lista, int id) {
+respostas_servidor remover_usuario(lista_encadeada lista, int id) {
     if (!id_enviado_eh_valido(id)) {
-        return 400;
+        return DADOS_INVALIDOS;
     }
     if (lista_encadeada_esta_vazia(lista)) {
-        return 400;
+        return DADOS_INVALIDOS;
     }
     if (!lista_encadeada_checa_elemento_esta_presente(lista, id)) {
-        return 404;
+        return CONTA_NAO_EXISTE;
     }
     usuario usuario_deletar;
     if (!lista_encadeada_get_elemento_por_id(lista, id, &usuario_deletar)) {
-        return 400;
+        return DADOS_INVALIDOS;
     }
 
     // libera a memoria de sua caixa de mensagem e remove elemento,
@@ -51,5 +51,5 @@ int remover_usuario(lista_encadeada lista, int id) {
     destroi_lista_array(usuario_deletar.caixa_de_entrada);
     
     lista_encadeada_remove_elemento(lista, id);
-    return 204;
+    return CONTA_REMOVIDA;
 }
