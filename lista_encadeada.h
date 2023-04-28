@@ -4,8 +4,6 @@
 
 #include <stdbool.h>
 
-typedef int chave;
-
 // elemento passado deve possuir id, logo deve ser uma struct
 typedef usuario elemento;
 

@@ -159,8 +159,8 @@ bool lista_array_remove(lista_array *lista, int indice) {
     }
     free(lista->itens[indice].mensagem);
     if (indice == lista->tamanho - 1) {
-        item item_temp;
-        lista->itens[indice] = lista->itens[indice];
+        item item_temp = {0, NULL};
+        lista->itens[indice] = item_temp;
     }
     else {
         memcpy(lista->itens, lista->itens + 1, sizeof(item) * (lista->tamanho - 1));
@@ -170,7 +170,7 @@ bool lista_array_remove(lista_array *lista, int indice) {
 }
 
 item lista_array_get(lista_array *lista, int indice) {
-    item item;
+    item item = {0, NULL};
     if (lista == NULL) {
         printf("lista esta nula\n");
         return item;
