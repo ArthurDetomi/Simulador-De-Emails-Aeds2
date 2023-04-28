@@ -72,6 +72,7 @@ void adiciona_item_indice_especifico(lista_array *lista, item item_param, int in
     for (int i = lista->tamanho - 1; i >= indice ; i--) {
         lista->itens[i + 1] = lista->itens[i];
     }
+    lista->tamanho++;
     lista->itens[indice] = item_param;
 }
 
@@ -89,21 +90,18 @@ void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
     else if (lista->tamanho >= lista->capacidade) {
         int nova_capacidade
             = (lista->capacidade > 0) ? lista->capacidade * 2 : 1;
-        lista->itens = realloc(lista->itens, nova_capacidade * sizeof(item));
+        lista->itens = (item *)realloc(lista->itens, nova_capacidade * sizeof(item));
         verifica_estouro_memoria(lista->itens, "lista_array_add()");
         lista->capacidade = nova_capacidade;
     }
 
     for (int i = 0; i < lista->tamanho; i++) {
         item item_atual = lista->itens[i];
-        if (item_param.prioridade == item_atual.prioridade) {
-            lista->tamanho++;
-            adiciona_item_indice_especifico(lista, item_param, i + 1);
-            return;
-        }
-        else if (item_param.prioridade > item_atual.prioridade) {
-            lista->tamanho++;
+        if (item_param.prioridade > item_atual.prioridade) {
             adiciona_item_indice_especifico(lista, item_param, i);
+            return;
+        }else if (item_param.prioridade == item_atual.prioridade) {
+            adiciona_item_indice_especifico(lista, item_param, i + 1);
             return;
         }
     }

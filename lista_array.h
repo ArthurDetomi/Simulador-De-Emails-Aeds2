@@ -5,7 +5,6 @@
 
 typedef struct {
     int prioridade;
-    time_t data_hora_envio;
     char *mensagem;
 } email;
 

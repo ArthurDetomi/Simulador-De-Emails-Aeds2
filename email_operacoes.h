@@ -5,6 +5,6 @@
 
 #include <stdbool.h>
 
-bool entregar_email_para_usuario(lista_encadeada lista, int id_usuario, char *msg, int priori_msg);
+bool enviar_email_para_usuario(lista_encadeada lista, int id_usuario, char *msg, int priori_msg);
 
 #endif
