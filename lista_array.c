@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <string.h>
 
 lista_array *cria_lista_array(void) {
     lista_array *l = (lista_array *)malloc(sizeof(lista_array));
@@ -62,11 +62,14 @@ void lista_array_add(lista_array *lista, item item_param) {
     }
     int posicao_final = lista->tamanho;
     lista->itens[posicao_final] = item_param;
+    if (strlen(item_param.mensagem) <= 0) {
+        lista->itens[posicao_final].mensagem = NULL;
+    }
     lista->tamanho++;
 }
 
 void adiciona_item_indice_especifico(lista_array *lista, item item_param, int indice) {
-    for (int i = indice; i < lista->tamanho - 1; i++) {
+    for (int i = lista->tamanho - 1; i >= indice ; i--) {
         lista->itens[i + 1] = lista->itens[i];
     }
     lista->itens[indice] = item_param;
@@ -107,6 +110,9 @@ void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
 
     int posicao_final = lista->tamanho;
     lista->itens[posicao_final] = item_param;
+    if (strlen(item_param.mensagem) <= 0) {
+        lista->itens[posicao_final].mensagem = NULL;
+    }
     lista->tamanho++;
     return;
 }

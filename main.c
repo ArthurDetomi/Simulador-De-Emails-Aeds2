@@ -13,11 +13,18 @@ int main(void) {
     for (int i = 0; i < 10; i++) {
         bool cadastrou = cadastrar_novo_usuario(lista_usuarios, i);
     }
+    char msg[] = "ola coisa louca";
+    for (int i = 0; i < 100; i++) {
+        entregar_email_para_usuario(lista_usuarios, 3, msg, 3);
+        entregar_email_para_usuario(lista_usuarios, 3, msg, 2);
+        entregar_email_para_usuario(lista_usuarios, 3, msg, 2);
+        entregar_email_para_usuario(lista_usuarios, 3, msg, 2);
+        entregar_email_para_usuario(lista_usuarios, 3, msg, 2);
+    }
+
 
     for(int i = 0; i < 10; i++) {
         remover_usuario(lista_usuarios, i);
     }
-
-
     destroi_lista_encadeada(lista_usuarios);
 }
