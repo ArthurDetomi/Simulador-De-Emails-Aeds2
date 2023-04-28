@@ -101,7 +101,11 @@ void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
             adiciona_item_indice_especifico(lista, item_param, i);
             return;
         }else if (item_param.prioridade == item_atual.prioridade) {
-            adiciona_item_indice_especifico(lista, item_param, i + 1);
+            int pos = i;
+            while (lista->itens[pos].prioridade == item_param.prioridade) {
+                pos++;
+            }
+            adiciona_item_indice_especifico(lista, item_param, pos);
             return;
         }
     }
@@ -137,7 +141,7 @@ void lista_array_set(lista_array *lista, int indice, item item) {
         return;
     }
     if (indice >= lista->tamanho || indice < 0) {
-        printf("Indice inserido invalido");
+        printf("Indice inserido invalido\n");
         return;
     }
     lista->itens[indice] = item;
@@ -149,7 +153,7 @@ bool lista_array_remove(lista_array *lista, int indice) {
         return false;
     }
     if (indice >= lista->tamanho || indice < 0) {
-        printf("Indice inserido invalido");
+        printf("Indice inserido invalido\n");
         return false;
     }
     if (indice == lista->tamanho - 1) {
@@ -172,7 +176,7 @@ item lista_array_get(lista_array *lista, int indice) {
         return item;
     }
     if (indice >= lista->tamanho || indice < 0) {
-        printf("Indice inserido invalido");
+        printf("Indice inserido invalido\n");
         return item;
     }
     return lista->itens[indice];

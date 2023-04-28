@@ -6,20 +6,20 @@
 #include <stdlib.h>
 
 // Cadastra novo usuario
-bool cadastrar_novo_usuario(lista_encadeada lista, int id) {
+int cadastrar_novo_usuario(lista_encadeada lista, int id) {
     if (!id_enviado_eh_valido(id)) {
-        return false;
+        return 400;
     }
     if (lista_encadeada_esta_vazia(lista)) {
         usuario novo_usuario;
         novo_usuario.id = id;
         novo_usuario.caixa_de_entrada = cria_lista_array();
         lista_encadeada_add_elemento(lista, novo_usuario);
-        return true;
+        return 201;
     }
     if (lista_encadeada_checa_elemento_esta_presente(lista, id)) {
         printf("ERRO:CONTA %d JA EXISTENTE\n", id);
-        return false;
+        return 401;
     }
     usuario novo_usuario;
     novo_usuario.id = id;
@@ -30,26 +30,25 @@ bool cadastrar_novo_usuario(lista_encadeada lista, int id) {
     
 
     printf("OK: CONTA %d CADASTRADA\n", id);
-    return true;
+    return 201;
 }
 
 // Remove usuario e limpa sua caixa de entrada
-bool remover_usuario(lista_encadeada lista, int id) {
+int remover_usuario(lista_encadeada lista, int id) {
     if (!id_enviado_eh_valido(id)) {
-        return false;
+        return 400;
     }
     if (lista_encadeada_esta_vazia(lista)) {
-        printf("Impossivel remover, lista está vazia\n");
-        return false;
+        return 400;
     }
     if (!lista_encadeada_checa_elemento_esta_presente(lista, id)) {
         printf("ERRO: CONTA %d NAO EXISTE\n", id);
-        return false;
+        return 404;
     }
     usuario usuario_deletar;
     if (!lista_encadeada_get_elemento_por_id(lista, id, &usuario_deletar)) {
         printf("Falha ao remover usuário\n");
-        return false;
+        return 400;
     }
 
     // libera a memoria de sua caixa de mensagem e remove elemento,
@@ -58,5 +57,5 @@ bool remover_usuario(lista_encadeada lista, int id) {
     
     lista_encadeada_remove_elemento(lista, id);
     printf("OK: CONTA %d REMOVIDA\n", id);
-    return true;
+    return 200;
 }

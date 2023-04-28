@@ -21,28 +21,53 @@ void preenche_email(email *email_envio, int prioridade, char *msg) {
 }
 
 // Entrega mensagem para o usuário com id correspondente
-bool enviar_email_para_usuario(lista_encadeada lista, int id_usuario, char *msg, int priori_msg) {
+int enviar_email_para_usuario(lista_encadeada lista_usuarios, int id_usuario, char *msg, int priori_msg) {
     if (!id_enviado_eh_valido(id_usuario)) {
-        return false;
+        return 400;
+    }
+    if (priori_msg < 0 || priori_msg > 9) {
+        return 400;
+    }
+    if (lista_encadeada_esta_vazia(lista_usuarios)) {
+        return 400;
     }
 
     usuario usuario_selecionado;
-    if (!lista_encadeada_get_elemento_por_id(lista, id_usuario, &usuario_selecionado)) {
-        printf("ERRO: CONTA %d NAO EXISTE\n", id_usuario);
-        return false;
+    if (!lista_encadeada_get_elemento_por_id(lista_usuarios, id_usuario, &usuario_selecionado)) {
+        return 404;
     }
 
-    
     email novo_email;
     preenche_email(&novo_email, priori_msg, msg);    
     
     if (lista_array_esta_vazia(usuario_selecionado.caixa_de_entrada)) {
         lista_array_add(usuario_selecionado.caixa_de_entrada, novo_email);
-        printf("OK: MENSAGEM PARA %d ENTREGUE\n", id_usuario);
-        return true;
+        return 200;
     }
 
-    printf("Adicionou com priori\n");
     lista_array_add_com_prioridade(usuario_selecionado.caixa_de_entrada, novo_email);
-    return true;
+    return 202;
+}
+
+int consulta_id_msg_priori(lista_encadeada lista_usuarios, int id_usuario, email *email_consulta) {
+    if (!id_enviado_eh_valido(id_usuario)) {
+        return 400;
+    }
+    if (lista_encadeada_esta_vazia(lista_usuarios)) {
+        return 400;
+    }
+
+    usuario usuario_selecionado;
+    if (!lista_encadeada_get_elemento_por_id(lista_usuarios, id_usuario, &usuario_selecionado)) {
+        return 404;
+    }
+
+    lista_array *caixa_de_entrada_usuario = usuario_selecionado.caixa_de_entrada;
+    if (lista_array_esta_vazia(caixa_de_entrada_usuario)) {
+        return 406;
+    }
+
+    *email_consulta = lista_array_get(caixa_de_entrada_usuario, 0);
+    lista_array_remove(caixa_de_entrada_usuario, 0);
+    return 200;
 }
