@@ -138,13 +138,14 @@ int lista_array_capacidade(lista_array *lista) {
 
 void lista_array_set(lista_array *lista, int indice, item item) {
     if (lista == NULL) {
-        printf("lista esta nula\n");
         return;
     }
+
+    // indice inserido invalido
     if (indice >= lista->tamanho || indice < 0) {
-        printf("Indice inserido invalido\n");
         return;
     }
+
     lista->itens[indice] = item;
 }
 
@@ -153,10 +154,12 @@ bool lista_array_remove(lista_array *lista, int indice) {
         printf("lista esta nula\n");
         return false;
     }
+
+    // indice inserido invalido
     if (indice >= lista->tamanho || indice < 0) {
-        printf("Indice inserido invalido\n");
         return false;
     }
+
     free(lista->itens[indice].mensagem);
     if (indice == lista->tamanho - 1) {
         item item_temp = {0, NULL};
@@ -175,16 +178,10 @@ item lista_array_get(lista_array *lista, int indice) {
         printf("lista esta nula\n");
         return item;
     }
+
+    // indice inserido invalido
     if (indice >= lista->tamanho || indice < 0) {
-        printf("Indice inserido invalido\n");
         return item;
     }
     return lista->itens[indice];
-}
-
-void percorre_lista_array_prioridades(lista_array *lista) {
-    printf("chegou aqui\n");
-    for (int i = 0; i < lista_array_tamanho(lista); i++) {
-        printf("priori msg %d = %d \n", i, lista->itens->prioridade);
-    }
 }

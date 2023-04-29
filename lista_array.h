@@ -51,6 +51,4 @@ int lista_array_capacidade(lista_array *lista);
 // Adiciona item com prioridade, ordenando por inserção
 void lista_array_add_com_prioridade(lista_array *lista, item item_param);
 
-void percorre_lista_array_prioridades(lista_array *lista);
-
 #endif

@@ -62,7 +62,8 @@ void lista_encadeada_remove_elemento(lista_encadeada lista, int id_elemento) {
         celula_anterior = celula_atual;
         celula_atual = celula_atual->proximo;
     }
-    printf("elemento não encontrado na lista \n");
+    // elemento não foi encontrado
+    return;
 }
 
 int lista_encadeada_tamanho(lista_encadeada lista) {
@@ -115,7 +116,6 @@ bool lista_encadeada_get_elemento_por_id(lista_encadeada lista, int id, elemento
         }
         celula_atual = celula_atual->proximo;
     }
-    printf("Usuario passado não está "
-           "presente:Function:lista_encadeada_get_elemento_por_id\n");
+    // usuario não está presente
     return false;
 }
