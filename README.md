@@ -9,5 +9,5 @@ make clean
 ``` 
 ### Rodar o programa
 ```bash
-./main <arquivo-de-entrada.txt>
+./main entradas-server/<arquivo-de-entrada.txt>
 ``` 
