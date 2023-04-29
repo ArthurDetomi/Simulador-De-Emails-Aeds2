@@ -1,4 +1,5 @@
 #include "functions_utils.h"
+#include "lista_array.h"
 #include "lista_encadeada.h"
 
 #include <stdbool.h>
@@ -78,6 +79,9 @@ int lista_encadeada_tamanho(lista_encadeada lista) {
 
 void destroi_lista_encadeada(lista_encadeada lista) {
     while (lista->proximo != NULL) {
+        if (lista->proximo->elemento.caixa_de_entrada != NULL) {
+            destroi_lista_array(lista->proximo->elemento.caixa_de_entrada);
+        }
         lista_encadeada_remove_primeiro_da_lista(lista);
     }
     free(lista);

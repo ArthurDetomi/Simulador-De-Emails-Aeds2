@@ -82,6 +82,7 @@ int main(int argv, char *argc[]) {
             }
             codigo_resposta = consulta_id_msg_priori(lista_usuarios, id_usuario, &email_consulta);
             mensagens_servidor_resposta(codigo_resposta, id_usuario, email_consulta.mensagem);
+            remove_email_ja_consultado(lista_usuarios, id_usuario);
          break;
          case 3:
             if (fscanf(arquivo, " %d", &id_usuario) != 1) {
@@ -93,8 +94,11 @@ int main(int argv, char *argc[]) {
             }
          break;
       }
+      free(msg_buffer);
    }
 
+   fclose(arquivo);
+   arquivo = NULL;
    destroi_lista_encadeada(lista_usuarios);
    return 0;
 }
