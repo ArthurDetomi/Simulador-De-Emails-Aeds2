@@ -35,28 +35,35 @@ void mensagens_servidor_resposta(
     int codigo_resposta, int id_usuario, char *msg
 );
 
+// Recebe uma String que diz o tipo de opração que será executada pelo servidor
 operacoes_servidor operacao_desejada(char *nome_operacao);
 
+// Entrega para usuário lendo o arquivo
 void servidor_operacao_entregar_mensagem_usuario(
     FILE *arquivo, lista_encadeada lista_usuarios
 );
 
+// Remove usuário especificado no arquivo
 void servidor_operacao_remover_usuario(
     FILE *arquivo, lista_encadeada lista_usuarios
 );
 
+// Libera toda memoria do programa
 void liberar_memoria_programa(
     FILE *arq_ponteiro, lista_encadeada lista_usuarios
 );
 
+// Cadastra usuário especificado no arquivo
 void servidor_operacao_cadastro_usuario(
     FILE *arquivo, lista_encadeada lista_usuarios
 );
 
+// Recebe uma consulta do arquivo e mostra a primeira mensagem com maior prioridade
 void servidor_operacao_consultar_mensagem_priori(
     FILE *arquivo, lista_encadeada lista_usuarios
 );
 
+// Defini qual operação será realizada conforme especificações do arquivo de entrada
 void realiza_operacoes_servidor(
     int cod_operacao, lista_encadeada lista_usuarios, FILE *arquivo
 );

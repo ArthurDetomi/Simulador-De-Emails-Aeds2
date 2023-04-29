@@ -15,6 +15,7 @@ respostas_servidor consulta_id_msg_priori(
     lista_encadeada lista_usuarios, int id_usuario, email *email_consulta
 );
 
+// Remove primeiro mensagem da caixa de entrada que já foi consultada
 void remove_email_ja_consultado(lista_encadeada lista_usuarios, int id_usuario);
 
 #endif
