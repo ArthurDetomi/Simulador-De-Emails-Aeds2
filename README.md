@@ -7,4 +7,7 @@ make
 ```bash
 make clean
 ``` 
-
+### Rodar o programa
+```bash
+./main <arquivo-de-entrada.txt>
+``` 
