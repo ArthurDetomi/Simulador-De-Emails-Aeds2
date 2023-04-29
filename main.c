@@ -8,49 +8,93 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-int main(void) {
-    lista_encadeada lista_usuarios = cria_lista_encadeada();
-    for (int i = 0; i < 10; i++) {
-        int codigo_resposta = cadastrar_novo_usuario(lista_usuarios, i);
-        mensagens_servidor_resposta(codigo_resposta, i, "");
-    }
-    char msg[] = "ola coisa louca";
-    for (int i = 0; i < 10; i++) {
-        int codigo_envio = enviar_email_para_usuario(lista_usuarios, 3, msg, i);
-        mensagens_servidor_resposta(codigo_envio, 3, "");
-    }
-
-    char msg2[] = "verifi";
-    int c = enviar_email_para_usuario(lista_usuarios, 3, msg2, 3);
-    mensagens_servidor_resposta(c, 3, "");
-    char msg3[] = "verifi2";
-    c = enviar_email_para_usuario(lista_usuarios, 3, msg3, 3);
-    mensagens_servidor_resposta(c, 3, "");
-    char ms4[] = "verifi3";
-    c = enviar_email_para_usuario(lista_usuarios, 3, ms4, 9);
-    mensagens_servidor_resposta(c, 3, "");
-
-    usuario usuario3; 
-    lista_encadeada_get_elemento_por_id(lista_usuarios, 3, &usuario3);
-
-    for (int i = 0; i < 13; i++) {
-        printf("prioridade = %d msg=%s\n", lista_array_get(usuario3.caixa_de_entrada, i).prioridade, lista_array_get(usuario3.caixa_de_entrada, i).mensagem);
-    }
+#include <string.h>
 
 
-    printf("consulta emails\n");
-    for (int i = 0; i < 13; i++) {
-        email email_requisicao;
-        int resposta = consulta_id_msg_priori(lista_usuarios, 3, &email_requisicao);
-        mensagens_servidor_resposta(resposta, 3, email_requisicao.mensagem);
-        remove_email_ja_consultado(lista_usuarios, 3);
-        // printf("prioridade = %d msg=%s\n", lista_array_get(usuario3.caixa_de_entrada, i).prioridade, lista_array_get(usuario3.caixa_de_entrada, i).mensagem);
-    }
+int operacao_desejada(char *nome_operacao) {
+   char operacoes[][10] = {"CONSULTA", "CADASTRA", "REMOVE", "ENTREGA"};
+   int qtd = 4;
+   for (int i = 0; i < qtd; i++) {
+      if (strcmp(nome_operacao, operacoes[i]) == 0) {
+         return i;
+      }
+   }
+   return -1;
+}
 
-    for(int i = 0; i < 10; i++) {
-        int codigo_remover_resp = remover_usuario(lista_usuarios, i);
-        mensagens_servidor_resposta(codigo_remover_resp, i, "");
-    }
-    destroi_lista_encadeada(lista_usuarios);
+int main(int argv, char *argc[]) {
+   lista_encadeada lista_usuarios = NULL;
+   if (argv != 2) {
+        printf("ERRO: ARGUMENTOS INVALIDOS\n");
+        exit(1);
+   }
+
+   FILE *arquivo = fopen(argc[1], "r");
+   if (arquivo == NULL) {
+      perror("Error");
+      exit(1);
+   }
+
+   char operacao[10];
+   while (!feof(arquivo)) {
+      if (fscanf(arquivo, "%s", operacao) != 1) {
+         perror("Error");
+         exit(1);
+      }
+      int cod_operacao = operacao_desejada(operacao);
+      if (cod_operacao == -1) {
+         printf("FORMATO ARQUIVO INVALIDO");
+         exit(1);
+      }
+      
+      if (lista_usuarios == NULL) {
+         lista_usuarios = cria_lista_encadeada();
+      }
+
+      int id_usuario, codigo_resposta;
+      email email_consulta = {0, NULL};
+      char c;
+      char *msg_buffer = (char *) malloc(100 * sizeof(char)); 
+      switch (cod_operacao) {
+         case 1:
+            if (fscanf(arquivo, " %d", &id_usuario) != 1) {
+               perror("Error");
+               exit(1);
+            }
+            if (lista_usuarios == NULL) {
+               lista_usuarios = cria_lista_encadeada();
+            }
+            codigo_resposta = cadastrar_novo_usuario(lista_usuarios, id_usuario);
+            mensagens_servidor_resposta(codigo_resposta, id_usuario, NULL);
+         break;
+         case 2:
+            if (fscanf(arquivo, " %d", &id_usuario) != 1) {
+               perror("Error");
+               exit(1);
+            }
+            codigo_resposta = remover_usuario(lista_usuarios, id_usuario);
+            mensagens_servidor_resposta(codigo_resposta, id_usuario, NULL);
+         break;
+         case 0:
+            if (fscanf(arquivo, " %d", &id_usuario) != 1) {
+               perror("Error");
+               exit(1);
+            }
+            codigo_resposta = consulta_id_msg_priori(lista_usuarios, id_usuario, &email_consulta);
+            mensagens_servidor_resposta(codigo_resposta, id_usuario, email_consulta.mensagem);
+         break;
+         case 3:
+            if (fscanf(arquivo, " %d", &id_usuario) != 1) {
+               perror("Error");
+               exit(1);
+            }
+            while ((c = fgetc(arquivo)) != EOF) {
+
+            }
+         break;
+      }
+   }
+
+   destroi_lista_encadeada(lista_usuarios);
+   return 0;
 }
