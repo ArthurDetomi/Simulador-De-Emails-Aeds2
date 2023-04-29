@@ -49,7 +49,7 @@ respostas_servidor remover_usuario(lista_encadeada lista, int id) {
     // libera a memoria de sua caixa de mensagem e remove elemento,
     // desalocando-o
     destroi_lista_array(usuario_deletar.caixa_de_entrada);
-    
+
     lista_encadeada_remove_elemento(lista, id);
     return CONTA_REMOVIDA;
 }

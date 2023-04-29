@@ -19,7 +19,9 @@ lista_encadeada cria_lista_encadeada() {
     return cria_celula(elemento_vazio);
 }
 
-void lista_encadeada_add_elemento(lista_encadeada lista, elemento elemento_param) {
+void lista_encadeada_add_elemento(
+    lista_encadeada lista, elemento elemento_param
+) {
     if (lista_encadeada_esta_vazia(lista)) {
         celula *nova_celula = cria_celula(elemento_param);
         lista->proximo = nova_celula;
@@ -88,7 +90,9 @@ void destroi_lista_encadeada(lista_encadeada lista) {
     free(lista);
 }
 
-bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id) {
+bool lista_encadeada_checa_elemento_esta_presente(
+    lista_encadeada lista, int id
+) {
     if (lista_encadeada_esta_vazia(lista)) {
         return false;
     }
@@ -103,7 +107,9 @@ bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id)
     return false;
 }
 
-bool lista_encadeada_get_elemento_por_id(lista_encadeada lista, int id, elemento *elemento_param) {
+bool lista_encadeada_get_elemento_por_id(
+    lista_encadeada lista, int id, elemento *elemento_param
+) {
     if (lista_encadeada_esta_vazia(lista)) {
         return false;
     }

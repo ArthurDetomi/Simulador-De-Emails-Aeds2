@@ -4,24 +4,27 @@
 #include "lista_encadeada.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <stdlib.h>
 
 void preenche_email(email *email_envio, int prioridade, char *msg) {
     int tam = strlen(msg);
     if (tam > 0) {
-        email_envio->mensagem = (char *) malloc(tam + 1);
+        email_envio->mensagem = (char *)malloc(tam + 1);
         verifica_estouro_memoria(email_envio->mensagem, "preenche_email()\n");
         strcpy(email_envio->mensagem, msg);
-    } else {
+    }
+    else {
         email_envio->mensagem = NULL;
     }
     email_envio->prioridade = prioridade;
 }
 
 // Entrega mensagem para o usuário com id correspondente
-respostas_servidor enviar_email_para_usuario(lista_encadeada lista_usuarios, int id_usuario, char *msg, int priori_msg) {
+respostas_servidor enviar_email_para_usuario(
+    lista_encadeada lista_usuarios, int id_usuario, char *msg, int priori_msg
+) {
     if (!id_enviado_eh_valido(id_usuario)) {
         return DADOS_INVALIDOS;
     }
@@ -33,23 +36,30 @@ respostas_servidor enviar_email_para_usuario(lista_encadeada lista_usuarios, int
     }
 
     usuario usuario_selecionado;
-    if (!lista_encadeada_get_elemento_por_id(lista_usuarios, id_usuario, &usuario_selecionado)) {
+    if (!lista_encadeada_get_elemento_por_id(
+            lista_usuarios, id_usuario, &usuario_selecionado
+        ))
+    {
         return CONTA_NAO_EXISTE;
     }
 
     email novo_email;
-    preenche_email(&novo_email, priori_msg, msg);    
-    
+    preenche_email(&novo_email, priori_msg, msg);
+
     if (lista_array_esta_vazia(usuario_selecionado.caixa_de_entrada)) {
         lista_array_add(usuario_selecionado.caixa_de_entrada, novo_email);
         return MENSAGEM_ENTREGUE;
     }
 
-    lista_array_add_com_prioridade(usuario_selecionado.caixa_de_entrada, novo_email);
+    lista_array_add_com_prioridade(
+        usuario_selecionado.caixa_de_entrada, novo_email
+    );
     return MENSAGEM_ENTREGUE;
 }
 
-respostas_servidor consulta_id_msg_priori(lista_encadeada lista_usuarios, int id_usuario, email *email_consulta) {
+respostas_servidor consulta_id_msg_priori(
+    lista_encadeada lista_usuarios, int id_usuario, email *email_consulta
+) {
     if (!id_enviado_eh_valido(id_usuario)) {
         return DADOS_INVALIDOS;
     }
@@ -58,7 +68,10 @@ respostas_servidor consulta_id_msg_priori(lista_encadeada lista_usuarios, int id
     }
 
     usuario usuario_selecionado;
-    if (!lista_encadeada_get_elemento_por_id(lista_usuarios, id_usuario, &usuario_selecionado)) {
+    if (!lista_encadeada_get_elemento_por_id(
+            lista_usuarios, id_usuario, &usuario_selecionado
+        ))
+    {
         return CONTA_NAO_EXISTE;
     }
 
@@ -71,7 +84,9 @@ respostas_servidor consulta_id_msg_priori(lista_encadeada lista_usuarios, int id
     return CONSULTA_REALIZADA;
 }
 
-void remove_email_ja_consultado(lista_encadeada lista_usuarios, int id_usuario) {
+void remove_email_ja_consultado(
+    lista_encadeada lista_usuarios, int id_usuario
+) {
     if (!id_enviado_eh_valido(id_usuario)) {
         return;
     }
@@ -80,7 +95,10 @@ void remove_email_ja_consultado(lista_encadeada lista_usuarios, int id_usuario) 
     }
 
     usuario usuario_selecionado;
-    if (!lista_encadeada_get_elemento_por_id(lista_usuarios, id_usuario, &usuario_selecionado)) {
+    if (!lista_encadeada_get_elemento_por_id(
+            lista_usuarios, id_usuario, &usuario_selecionado
+        ))
+    {
         return;
     }
     bool removeu = lista_array_remove(usuario_selecionado.caixa_de_entrada, 0);

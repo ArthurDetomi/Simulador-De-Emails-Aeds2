@@ -18,7 +18,9 @@ typedef struct celula *lista_encadeada;
 lista_encadeada cria_lista_encadeada();
 
 // Adiciona um elemento ao final da lista
-void lista_encadeada_add_elemento(lista_encadeada lista, elemento elemento_param);
+void lista_encadeada_add_elemento(
+    lista_encadeada lista, elemento elemento_param
+);
 
 // Verifica se a lista está vazia
 bool lista_encadeada_esta_vazia(lista_encadeada lista);
@@ -34,9 +36,14 @@ void destroi_lista_encadeada(lista_encadeada lista);
 
 /* Percorre a lista encontra o elemento com o respectivo id e verifica se ele se
  * encontra ou não na lista*/
-bool lista_encadeada_checa_elemento_esta_presente(lista_encadeada lista, int id);
+bool lista_encadeada_checa_elemento_esta_presente(
+    lista_encadeada lista, int id
+);
 
-// Passa o elemento pesquisado atraves de um ponteiro, retorna se operação falhou ou não
-bool lista_encadeada_get_elemento_por_id(lista_encadeada lista, int id, elemento* elemento);
+// Passa o elemento pesquisado atraves de um ponteiro, retorna se operação
+// falhou ou não
+bool lista_encadeada_get_elemento_por_id(
+    lista_encadeada lista, int id, elemento *elemento
+);
 
 #endif

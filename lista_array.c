@@ -30,7 +30,7 @@ void destroi_lista_array(lista_array *lista) {
         return;
     }
     if (lista->itens != NULL) {
-        for(int i = 0; i < lista->tamanho; i++) {
+        for (int i = 0; i < lista->tamanho; i++) {
             char *str = lista->itens[i].mensagem;
             if (str != NULL) {
                 free(str);
@@ -69,8 +69,10 @@ void lista_array_add(lista_array *lista, item item_param) {
     lista->tamanho++;
 }
 
-void adiciona_item_indice_especifico(lista_array *lista, item item_param, int indice) {
-    for (int i = lista->tamanho - 1; i >= indice ; i--) {
+void adiciona_item_indice_especifico(
+    lista_array *lista, item item_param, int indice
+) {
+    for (int i = lista->tamanho - 1; i >= indice; i--) {
         lista->itens[i + 1] = lista->itens[i];
     }
     lista->tamanho++;
@@ -91,7 +93,8 @@ void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
     else if (lista->tamanho >= lista->capacidade) {
         int nova_capacidade
             = (lista->capacidade > 0) ? lista->capacidade * 2 : 1;
-        lista->itens = (item *)realloc(lista->itens, nova_capacidade * sizeof(item));
+        lista->itens
+            = (item *)realloc(lista->itens, nova_capacidade * sizeof(item));
         verifica_estouro_memoria(lista->itens, "lista_array_add()");
         lista->capacidade = nova_capacidade;
     }
@@ -101,7 +104,8 @@ void lista_array_add_com_prioridade(lista_array *lista, item item_param) {
         if (item_param.prioridade > item_atual.prioridade) {
             adiciona_item_indice_especifico(lista, item_param, i);
             return;
-        }else if (item_param.prioridade == item_atual.prioridade) {
+        }
+        else if (item_param.prioridade == item_atual.prioridade) {
             int pos = i;
             while (lista->itens[pos].prioridade == item_param.prioridade) {
                 pos++;
@@ -162,18 +166,20 @@ bool lista_array_remove(lista_array *lista, int indice) {
 
     free(lista->itens[indice].mensagem);
     if (indice == lista->tamanho - 1) {
-        item item_temp = {0, NULL};
+        item item_temp = { 0, NULL };
         lista->itens[indice] = item_temp;
     }
     else {
-        memcpy(lista->itens, lista->itens + 1, sizeof(item) * (lista->tamanho - 1));
+        memcpy(
+            lista->itens, lista->itens + 1, sizeof(item) * (lista->tamanho - 1)
+        );
     }
     lista->tamanho--;
     return true;
 }
 
 item lista_array_get(lista_array *lista, int indice) {
-    item item = {0, NULL};
+    item item = { 0, NULL };
     if (lista == NULL) {
         printf("lista esta nula\n");
         return item;

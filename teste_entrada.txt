@@ -9,11 +9,13 @@ CADASTRA 8
 CADASTRA 1
 REMOVE 1
 REMOVE 2
+REMOVE 10
 ENTREGA 6 5 Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.Si num tem leite, prioridade 5 enviado mais cedo. FIM
 ENTREGA 6 5 Mussum Ipsum, cacilds vidis litro abertis. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.Si num tem leite, prioridade 5, enviado mais tarde. FIM
 ENTREGA 6 9 Mussum Ipsum, cacilds vidis litro abertis. Praesent vel viverra nisi, prioridade maxima 9. FIM
 ENTREGA 6 0 Mussum Ipsum, cacilds vidis litro abertis. Praesent vel viverra nisi, prioridade minima 0. FIM
 ENTREGA 6 11 Mussum Ipsum, cacilds vidis litro abertis. Praesent vel viverra nisi, prioridade invalida 11. FIM
+ENTREGA 6 -1 Mussum Ipsum, cacilds vidis litro abertis. Praesent vel viverra nisi, prioridade invalida 11. FIM
 ENTREGA 1 5 Mussum Ipsum, cacilds vidis litro abertis. Praesent vel viverra nisi. FIM
 ENTREGA 2 5 Mussum Ipsum, cacilds vidis litro abertis. Praesent vel viverra nisi. FIM
 CONSULTA 6

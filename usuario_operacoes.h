@@ -1,8 +1,7 @@
 #ifndef USUARIO_OPERACOES_H
 #define USUARIO_OPERACOES_H
 #include "lista_encadeada.h"
-#include "lista_array.h"
-#include "functions_utils.h"
+#include "servidor_email_operacoes.h"
 
 // Cadastra novo usuario
 respostas_servidor cadastrar_novo_usuario(lista_encadeada lista, int id);
@@ -10,4 +9,3 @@ respostas_servidor cadastrar_novo_usuario(lista_encadeada lista, int id);
 respostas_servidor remover_usuario(lista_encadeada lista, int id);
 
 #endif
-
