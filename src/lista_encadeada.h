@@ -17,7 +17,7 @@ typedef struct celula *lista_encadeada;
 // cria uma nova lista
 lista_encadeada cria_lista_encadeada();
 
-// Adiciona um elemento ao final da lista
+// Adiciona um elemento ao inicio da lista, complexidade O(1)
 void lista_encadeada_add_elemento(
     lista_encadeada lista, elemento elemento_param
 );
