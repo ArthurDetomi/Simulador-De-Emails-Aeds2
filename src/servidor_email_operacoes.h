@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Enumera cada operação realizada pelo servidor
 enum operacoes_servidor_enum {
     CONSULTA = 0,
     CADASTRA = 1,
@@ -17,6 +18,7 @@ enum operacoes_servidor_enum {
 
 typedef enum operacoes_servidor_enum operacoes_servidor;
 
+// Enumera respostas de saída do servidor
 enum respostas_servidor_enum {
     CONSULTA_REALIZADA = 200,
     MENSAGEM_ENTREGUE = 202,
