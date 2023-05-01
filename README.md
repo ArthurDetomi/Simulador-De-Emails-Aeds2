@@ -19,4 +19,4 @@ Estão dentro do diretório  "/entradas-server", são arquivos usados para usar 
 Testes Unitários que foram realizados foram colocados dentro do diretório "/testes", nele também possui exemplos de textos de entrada, todos os arquivos de entrada passaram com êxito. 
 
 ### Informações
-- **Pasta /especificações-do-trabalho-documentacao contem pdf do trabalho prático e sua documentacao.**
+- **Pasta /especificações-documentacao contem pdf do trabalho prático e sua documentacao.**
