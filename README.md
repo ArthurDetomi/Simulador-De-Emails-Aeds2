@@ -21,6 +21,8 @@ Testes Unitários que foram realizados foram colocados dentro do diretório "/te
 ### Informações
 - **Pasta /especificações-documentacao contem pdf do trabalho prático e sua documentacao.**
 ### Créditos
-- **Desenvolvido por** : https://github.com/ArthurDetomi 
-![nome desejado da imagem](https://avatars.githubusercontent.com/u/99772832?v=4)
 - **Documentação :** Rhayan e Rodrigo
+- **Desenvolvido por** : https://github.com/ArthurDetomi 
+
+![nome desejado da imagem](https://avatars.githubusercontent.com/u/99772832?v=4)
+
