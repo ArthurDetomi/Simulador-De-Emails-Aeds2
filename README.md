@@ -25,12 +25,13 @@ Testes Unitários que foram realizados foram colocados dentro do diretório "/te
 
 - **Desenvolvido por** : https://github.com/ArthurDetomi 
 
-![nome desejado da imagem](https://avatars.githubusercontent.com/u/99772832?v=4)
+![Geraldo-Arthur-Detomi](https://avatars.githubusercontent.com/u/99772832?v=4)
 
 
 
 - **Documentação :** Rhayan e Rodrigo
 
-https://avatars.githubusercontent.com/u/102100725?v=4
+
+![Rodrigo](https://avatars.githubusercontent.com/u/102100725?v=4)
 
 
