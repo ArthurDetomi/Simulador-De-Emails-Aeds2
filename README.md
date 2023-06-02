@@ -23,7 +23,7 @@ Testes Unitários que foram realizados foram colocados dentro do diretório "/te
 ### Créditos
 
 
-- **Desenvolvido por** : https://github.com/ArthurDetomi 
+- **Desenvolvido por** : [Git:Arthur Detomi](https://github.com/ArthurDetomi) 
 
 ![Geraldo-Arthur-Detomi](https://avatars.githubusercontent.com/u/99772832?v=4)
 
